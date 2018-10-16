@@ -14,9 +14,9 @@
     (error "This config requires at least Emacs %s, but you're running %s"
            min-version emacs-version)))
 
-(setq initial-scratch-message
-      "EXORDIUM DID NOT LOAD CORRECTLY.
-Check the warnings and messages buffers, or restart with --debug-init")
+;; (setq initial-scratch-message
+;;       "EXORDIUM DID NOT LOAD CORRECTLY.
+;; Check the warnings and messages buffers, or restart with --debug-init")
 
 (defconst exordium-before-init "before-init.el"
   "name of the before init file")
@@ -145,7 +145,7 @@ Check the warnings and messages buffers, or restart with --debug-init")
                                          (ac-rtags                . "melpa-pinned")
                                          (company-rtags           . "melpa-pinned")
                                          (flycheck-rtags          . "melpa-pinned")
-                                         (helm-rtags              . "melpa-pinned")
+;                                         (helm-rtags              . "melpa-pinned")
                                          (auto-complete-c-headers . "melpa")
                                          (yasnippet               . "melpa-pinned")
                                          (js2-mode                . "melpa-pinned")
@@ -155,14 +155,14 @@ Check the warnings and messages buffers, or restart with --debug-init")
                                          (clojure-mode            . "melpa-pinned")
                                          (paredit                 . "melpa-pinned")
                                          (rainbow-delimiters      . "melpa-pinned")
-                                         (helm                    . "melpa-pinned")
-                                         (helm-descbinds          . "melpa-pinned")
-                                         (helm-flycheck           . "melpa-pinned")
-                                         (helm-swoop              . "melpa-pinned")
-                                         (helm-ag                 . "melpa-pinned")
+;                                         (helm                    . "melpa-pinned")
+;                                         (helm-descbinds          . "melpa-pinned")
+;                                         (helm-flycheck           . "melpa-pinned")
+;                                         (helm-swoop              . "melpa-pinned")
+;;                                         (helm-ag                 . "melpa-pinned")
                                          (ido-completing-read+    . "melpa-pinned")
                                          (projectile              . "melpa-pinned")
-                                         (helm-projectile         . "melpa-pinned")
+;                                         (helm-projectile         . "melpa-pinned")
                                          (cmake-mode              . "melpa-pinned")
                                          (markdown-mode           . "melpa-pinned")
                                          (impatient-mode          . "melpa-pinned")
@@ -170,7 +170,7 @@ Check the warnings and messages buffers, or restart with --debug-init")
                                          (fill-column-indicator   . "melpa-pinned")
                                          (exec-path-from-shell    . "melpa-pinned")
                                          (goto-chg                . "melpa")
-                                         (treemacs-projectile     . "melpa-pinned")
+                         ;                (treemacs-projectile     . "melpa-pinned")
                                          (page-break-lines        . "melpa-pinned")
                                          (org-bullets             . "melpa-pinned")
                                          (ox-gfm                  . "melpa-pinned")
@@ -291,9 +291,9 @@ the .elc exists. Also discard .elc without corresponding .el"
        (require 'init-autocomplete)) ; auto-completion (see below for RTags AC)
       ((eq exordium-complete-mode :company)
        (require 'init-company))) ; company mode (rtags are on by default)
-(when exordium-helm-projectile  ; find files anywhere in project
-  (require 'init-helm-projectile))
-(require 'init-helm)            ; setup helm
+;(when exordium-helm-projectile  ; find files anywhere in project
+;  (require 'init-helm-projectile))
+;(require 'init-helm)            ; setup helm
 
 (update-progress-bar)
 
@@ -330,7 +330,7 @@ the .elc exists. Also discard .elc without corresponding .el"
 (require 'init-rtags)
 (when exordium-rtags-auto-complete
   (rtags-auto-complete))
-(require 'init-rtags-helm)
+;(require 'init-rtags-helm)
 (require 'init-rtags-cmake)
 (require 'init-rtags-cdb)
 
@@ -349,8 +349,8 @@ the .elc exists. Also discard .elc without corresponding .el"
 (require 'init-elisp)
 
 ;;; Clojure
-(when exordium-clojure
-  (require 'init-clojure))
+;(when exordium-clojure
+;  (require 'init-clojure))
 
 ;;; include-what-you-use
 (require 'init-iwyu)
@@ -365,14 +365,6 @@ the .elc exists. Also discard .elc without corresponding .el"
 ;  (require 'init-powerline))
 
 (update-progress-bar)
-
-;;; Greetings
-(setq initial-scratch-message
-      (let ((current-user (split-string (user-full-name) " ")))
-        (format ";; Happy hacking %s!
-
-" (if current-user (car current-user) exordium-current-user))))
-
 
 
 ;; ------------------------------------------------- Customization
@@ -406,6 +398,24 @@ the .elc exists. Also discard .elc without corresponding .el"
 (setq mouse-wheel-scroll-amount '(1)) ;;mouse scroll moves 1 line at a time, instead of 5 lines
 (setq mouse-wheel-progressive-speed nil) ;;on a long mouse scroll keep scrolling by 1 line
 (scroll-bar-mode -1)
-(setq sml/theme 'dark)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;;; End of file

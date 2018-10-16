@@ -19,7 +19,7 @@
 (require 'projectile)
 (require 'helm-projectile)
 (require 'helm-swoop)
-(require 'treemacs-projectile)
+;(require 'treemacs-projectile)
 (require 'init-prefs)
 
 (projectile-global-mode)
@@ -85,8 +85,8 @@
 
 ;;; C-c e = Open treemacs in the current directory
 ;;; C-c E = Open treemacs in the current projectile project
-(define-key global-map [(control c)(e)] (function treemacs))
-(define-key global-map [(control c)(E)] (function treemacs-projectile))
+;(define-key global-map [(control c)(e)] (function treemacs))
+;(define-key global-map [(control c)(E)] (function treemacs-projectile))
 
 
 
