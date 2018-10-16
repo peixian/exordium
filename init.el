@@ -361,8 +361,8 @@ the .elc exists. Also discard .elc without corresponding .el"
 (dolist (tapped-file exordium-tapped-after-init-files)
   (load tapped-file))
 
-(when (and exordium-theme exordium-enable-powerline)
-  (require 'init-powerline))
+;(when (and exordium-theme exordium-enable-powerline)
+;  (require 'init-powerline))
 
 (update-progress-bar)
 
@@ -372,5 +372,40 @@ the .elc exists. Also discard .elc without corresponding .el"
         (format ";; Happy hacking %s!
 
 " (if current-user (car current-user) exordium-current-user))))
+
+
+
+;; ------------------------------------------------- Customization
+(add-to-list 'default-frame-alist
+             '(ns-transparent-titlebar . t))
+
+(add-to-list 'default-frame-alist
+             '(ns-appearance . dark)) ;; or dark - depending on your theme
+
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<left>") 'windmove-left)
+(global-set-key (kbd "s-<up>") 'windmove-up)
+(global-set-key (kbd "s-<down>") 'windmove-down)
+(global-set-key (kbd "s-k") 'kill-this-buffer)
+(global-set-key (kbd "s-b") 'switch-to-buffer)
+(global-set-key (kbd "C-x g") 'magit-status)
+
+(require 'tramp)                                        ;;
+(add-to-list 'tramp-remote-path "/opt/bb/bin")             ;;
+(add-to-list 'tramp-remote-path "/bbsrc/bin")
+
+(load "~/code/dotfiles/emacs-layers/peixianwang/blacken.el")
+(add-hook 'python-mode-hook 'blacken-mode)
+
+
+(setq scroll-conservatively 101) ;;move minimum when cursor exits view, instead of recentering
+(setq mouse-wheel-scroll-amount '(1)) ;;mouse scroll moves 1 line at a time, instead of 5 lines
+(setq mouse-wheel-progressive-speed nil) ;;on a long mouse scroll keep scrolling by 1 line
+(scroll-bar-mode -1)
+(setq sml/theme 'dark)
 
 ;;; End of file
