@@ -18,7 +18,7 @@
 
 (defcustom exordium-preferred-fonts
   '(("Consolas"  . 120)
-    ("Monaco"    . 120)
+    ("Monaco"    . 140)
     ("Monospace" . 120)
     ("Mono"      . 120))
   "List of preferred fonts/sizes to use, in decreasing order of

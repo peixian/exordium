@@ -417,5 +417,32 @@ the .elc exists. Also discard .elc without corresponding .el"
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(load-file "~/.emacs.d/sensible-defaults.el")
+(sensible-defaults/use-all-settings)
+(sensible-defaults/use-all-keybindings)
 
+
+(defvar better-defaults-move-to-beginning-of-code-first t
+  "when t, first stroke of C-a will move the cursor to the beginning of code.
+When nil, first stroke will go to the beginning of line.
+Subsequent strokes will toggle between beginning of line and beginning of code.")
+
+(defvar better-defaults-move-to-end-of-code-first nil
+  "when t, first stroke of C-e will move the cursor to the end of code (before comments).
+When nil, first stroke will go to the end of line (after comments).
+Subsequent strokes will toggle between end of line and end of code.")
+
+(defun spacemacs/backward-kill-word-or-region (&optional arg)
+  "Calls `kill-region' when a region is active and
+`backward-kill-word' otherwise. ARG is passed to
+`backward-kill-word' if no region is active."
+  (interactive "p")
+  (if (region-active-p)
+      ;; call interactively so kill-region handles rectangular selection
+      ;; correctly (see https://github.com/syl20bnr/spacemacs/issues/3278)
+      (call-interactively #'kill-region)
+    (backward-kill-word arg)))
+
+(global-set-key (kbd "C-w") 'spacemacs/backward-kill-word-or-region)
+(server-start)
 ;;; End of file
